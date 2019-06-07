@@ -1,0 +1,70 @@
+{% load staticfiles%}
+
+<!doctype html>
+{% load staticfiles %}
+
+{% if request.session.status %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <table align="center">
+        <tr>
+            <th style="align-items: center">
+                {% include 'os_main_templates/os_main_title.html' %}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                 {% include 'os_admin_templates/os_admin_menu.html' %}
+            </th>
+        </tr>
+        <tr>
+        <th>
+            {% for x in data %}
+                <table align="cneter" border="2">
+                    <tr><th bgcolor="aqua">NAME</th><th>{{ x.name }}</th> <th rowspan="6"><img src="{{ x.photo.url }}" width="200" height="200"></th> </tr>
+
+                    <tr><th bgcolor="aqua">CONTACT NO</th><th>{{ x.contactno }}</th> </tr>
+                    <tr><th bgcolor="aqua">ADDRESS</th><th width="300">{{ x.address }}</th> </tr>
+                    <tr><th bgcolor="aqua" colspan="2" style="text-align: center">
+
+                        <a href="/osadmin/deleteclient/?idno={{ x.username }}">
+                        DELETE
+                        </a>
+                    </th></tr>
+                </table>
+                {% endfor %}
+
+                       </th>
+                   </tr>
+               </table>
+            </th>
+
+
+        </tr>
+    </table>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% else %}
+    <center>
+        <font color="red" size="5" face="Arial">
+            <h1>Please Login</h1>
+        </font>
+    </center>
+{% endif %}
+
+
+
+

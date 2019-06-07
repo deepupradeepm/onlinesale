@@ -1,0 +1,93 @@
+{% load staticfiles%}
+
+{% if request.session.status %}
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <table align="center">
+        <tr>
+            <th style="align-items: center">
+                {% include 'os_main_templates/os_main_title.html' %}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                 {% include 'os_agent_templates/os_agent_menu.html' %}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                &emsp;
+               <table align="center" border="2">
+                   <tr>
+                       <th>
+                           <form action="/osagent/agentpropertysave/" method="post" enctype="multipart/form-data">
+                               {% csrf_token %}
+                           <table align="center" border="2">
+                               <tr><th>Add a New Property</th></tr>
+
+                               <tr><th><input type="text" placeholder="Name" name="p2" required></th></tr>
+                               <tr><th><input type="text" placeholder="Location" name="p3" required></th></tr>
+                               <tr><th><input type="text" placeholder="Size" name="p4" required></th></tr>
+                               <tr><th><input type="decimal" placeholder="Price" name="p5" required></th></tr>
+                               <tr><th><input type="text" placeholder="Facing" name="p6" required></th></tr>
+                               <tr><th><input type="text" placeholder="Comment" name="p7" required></th></tr>
+                               <tr><th>Photo<input type="file" name="p8"></th></tr>
+                               <tr><th><button type="submit">Save</button> </th></tr>
+                           </table>
+                           </form>
+                       </th>
+                       <th>
+                           {% for x in data %}
+                           <table align="center" border="2">
+                               <tr>
+                                   <th width="150">Name :</th> <th width="150">{{ x.name }}</th>
+                                   <th rowspan="7"> <img src="{{ x.photo.url }}" width="150" height="150"></th>
+                               </tr>
+                               <tr><th width="150">Location :</th> <th width="150">{{ x.location }}</th></tr>
+                               <tr><th width="150">Size :</th> <th width="150">{{ x.size }}</th></tr>
+                               <tr><th width="150">Price(Per Yard) :</th> <th width="150">{{ x.price }}</th></tr>
+                               <tr><th width="150">Facing :</th> <th width="150">{{ x.facing }}</th></tr>
+                               <tr><th width="150">Comments :</th> <th width="150">{{ x.comment }}</th></tr>
+                               <tr><th width="150">POST DATE :</th> <th width="150">{{ x.add_date }}</th></tr>
+                               <tr><th width="150">
+                                   <img src="{% static 'images/update.png' %}">
+                               </th> <th width="150">
+
+                                       <a href="/osagent/agentdeleteconformation{{ x.no }}/">
+                                    <img src="{% static 'images/delete-button.png' %}">
+                                       </a>
+                               </th></tr>
+                           </table>
+                           {% endfor %}
+                       </th>
+                   </tr>
+               </table>
+            </th>
+        </tr>
+    </table>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% else %}
+    <center>
+        <font color="red" size="5" face="Arial">
+            <h1>Please Login</h1>
+        </font>
+    </center>
+{% endif %}
+
+
